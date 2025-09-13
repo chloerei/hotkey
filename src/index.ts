@@ -45,7 +45,11 @@ function keyDownHandler(event: KeyboardEvent) {
     for (let i = newTriePosition.children.length - 1; i >= 0; i -= 1) {
       elementToFire = newTriePosition.children[i]
       const scope = elementToFire.getAttribute('data-hotkey-scope')
-      if ((!formField && !scope) || (formField && target.id === scope)) {
+      if (
+        elementToFire.hasAttribute('data-hotkey-global') ||
+        (!formField && !scope) ||
+        (formField && target.id === scope)
+      ) {
         shouldFire = true
         break
       }
